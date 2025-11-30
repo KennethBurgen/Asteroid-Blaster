@@ -32,7 +32,7 @@ jobs:
       fail-fast: false
       matrix:
         unityVersion:
-          - 6000.2.14f1 # some version must be included for testing
+          - auto # takes the Unity Editor version from the project's settings
         testMode:
           - playmode
           - editmode
