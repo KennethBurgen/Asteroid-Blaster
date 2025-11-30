@@ -22,7 +22,7 @@ jobs:
         run: dotnet tool restore
 
       - name: Run CSharpier Check
-        run: dotnet tool run csharpier --check .
+        run: dotnet tool run csharpier check .
 
   testAllModes:
     name: Test in ${{ matrix.testMode }}
