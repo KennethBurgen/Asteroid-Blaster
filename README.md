@@ -6,6 +6,11 @@ Mit jedem Run verdienst du Ressourcen, die du in permanente **Upgrades** investi
 
 ---
 
+## 🔗 Links
+- Mockups: https://www.figma.com/design/otqJv41fXgriJOV4bF3tk5/Asteroid-Blaster?m=auto&t=yOlKxE7K3nvAe0Gs-6
+
+---
+
 ## 🎯 Projektziel
 
 Dieses Projekt wurde entwickelt, um ein **komplettes Mini-Spiel mit professionellen Entwicklungsstrukturen** in Unity umzusetzen.  
