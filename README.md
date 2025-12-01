@@ -5,6 +5,11 @@ Du steuerst dein Raumschiff durch ein endloses Asteroidenfeld, weichst aus, samm
 Mit jedem Run verdienst du Ressourcen, die du in permanente **Upgrades** investieren kannst – für mehr Feuerkraft, Leben oder Spezialfähigkeiten.
 
 ---
+## Project Setup
+- Unity Editor: 6000.2.10f1 (Unity 6)
+- IDE: JetBrains Rider non-commercial
+- Sprites: Aseprite
+---
 
 ## 🔗 Links
 - Mockups: https://www.figma.com/design/otqJv41fXgriJOV4bF3tk5/Asteroid-Blaster?m=auto&t=yOlKxE7K3nvAe0Gs-6
