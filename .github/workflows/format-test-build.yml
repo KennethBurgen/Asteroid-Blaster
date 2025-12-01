@@ -69,14 +69,16 @@ jobs:
 
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runs-on }}
     needs: [check_formatting, testAllModes]
     strategy:
       fail-fast: false
       matrix:
-        targetPlatform: # Bisher nur Windows und Mac support
-          - StandaloneWindows64 # 64Bit
-          - StandaloneOSX 
+        include: # Bisher nur Windows und Mac support
+          - targetPlatform: StandaloneWindows64 # 64Bit
+            runs-on: windows-latest
+          - targetPlatform: StandaloneOSX
+            runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
         with:
