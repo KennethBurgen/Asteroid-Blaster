@@ -2,6 +2,8 @@ namespace Utilities
 {
     public class GlobalContext
     {
+        #region Singleton
+
         private static GlobalContext _instance;
 
         public static GlobalContext Instance
@@ -12,16 +14,19 @@ namespace Utilities
                 {
                     _instance = new GlobalContext();
                 }
+
                 return _instance;
             }
         }
-        
-        // Globale Referenzen
-        public readonly InputProvider InputProvider;
 
-        private GlobalContext()
+        #endregion
+
+        // Globale Referenzen
+        public InputProvider InputProvider { get; private set; }
+
+        public void SetInputProvider(InputProvider inputProvider)
         {
-            InputProvider = new InputProvider();
+            InputProvider = inputProvider;
         }
     }
 }
