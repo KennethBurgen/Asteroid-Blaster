@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Utilities
 {
     public class GlobalContext
@@ -19,11 +17,11 @@ namespace Utilities
         }
         
         // Globale Referenzen
-        public readonly InputProvider inputProvider;
+        public readonly InputProvider InputProvider;
 
         private GlobalContext()
         {
-            inputProvider = new InputProvider();
+            InputProvider = new InputProvider();
         }
     }
 }
