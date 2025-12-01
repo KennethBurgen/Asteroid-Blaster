@@ -25,6 +25,8 @@ jobs:
         run: dotnet tool run csharpier check .
 
   testAllModes:
+    permissions:
+      checks: write # if not set pipeline doesn't have the right to publish the report for the tests, can also give actions Read and Write permissions
     name: Test in ${{ matrix.testMode }}
     runs-on: ubuntu-latest
     needs: check_formatting
