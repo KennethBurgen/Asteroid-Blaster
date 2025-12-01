@@ -8,7 +8,7 @@ Mit jedem Run verdienst du Ressourcen, die du in permanente **Upgrades** investi
 ## Project Setup
 - Unity Editor: 6000.2.10f1 (Unity 6)
 - IDE: JetBrains Rider non-commercial
-- Sprites: Asesprite
+- Sprites: Aseprite
 ---
 
 ## 🔗 Links
