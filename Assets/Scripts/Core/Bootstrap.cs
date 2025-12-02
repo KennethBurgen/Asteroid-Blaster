@@ -13,7 +13,7 @@ namespace Core
         void Awake()
         {
             // Referenzen an globale Kontext binden
-            _context = new GlobalContext();
+            _context = GlobalContext.Instance;
             _context.BindInputProvider(inputProvider);
 
             // Persistent
