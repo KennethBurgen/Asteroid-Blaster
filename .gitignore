@@ -95,6 +95,10 @@ fabric.properties
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
+# Unity Assets im Plugin Ordner
+/[Aa]ssets/Plugins.meta
+/[Aa]ssets/Plugins
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
