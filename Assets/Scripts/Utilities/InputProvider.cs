@@ -6,10 +6,12 @@ namespace Utilities
     {
         private PlayerInputActions _playerInputActions;
 
-        public Vector2 MoveInput => _playerInputActions.Player.Move.ReadValue<Vector2>();
-        public bool FireInput => _playerInputActions.Player.Fire.IsPressed();
-        public bool BackInput => _playerInputActions.Player.Back.WasPressedThisFrame();
-        public bool SubmitInput => _playerInputActions.Player.Submit.WasPressedThisFrame();
+        public Vector2 MoveInput =>
+            _playerInputActions?.Player.Move.ReadValue<Vector2>() ?? Vector2.zero;
+        public bool FireInput => _playerInputActions?.Player.Fire.IsPressed() ?? false;
+        public bool BackInput => _playerInputActions?.Player.Back.WasPressedThisFrame() ?? false;
+        public bool SubmitInput =>
+            _playerInputActions?.Player.Submit.WasPressedThisFrame() ?? false;
 
         private void OnEnable()
         {
