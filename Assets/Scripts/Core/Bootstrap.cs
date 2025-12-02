@@ -1,6 +1,7 @@
 using UnityEngine;
+using Utilities;
 
-namespace Utilities
+namespace Core
 {
     public class Bootstrap : MonoBehaviour
     {
