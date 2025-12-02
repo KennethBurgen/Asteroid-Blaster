@@ -24,6 +24,10 @@ namespace Utilities
         // Globale Referenzen
         public InputProvider InputProvider { get; private set; }
 
+        /// <summary>
+        /// Bindet einen InputProvider an den globalen Kontext
+        /// </summary>
+        /// <param name="inputProvider">ein <see cref="InputProvider"/></param>
         public void BindInputProvider(InputProvider inputProvider)
         {
             if (!inputProvider)
