@@ -21,7 +21,7 @@ namespace Utilities
         /// </summary>
         private void InitializeSingleton()
         {
-            if (!_instance && _instance != this)
+            if (_instance is not null && _instance != this)
             {
                 Debug.LogWarning(
                     "Deleting Object -"
