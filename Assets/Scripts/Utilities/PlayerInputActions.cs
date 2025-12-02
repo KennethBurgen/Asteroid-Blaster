@@ -157,7 +157,7 @@ namespace Utilities
                 {
                     ""name"": ""down"",
                     ""id"": ""10510a06-212f-496e-ada1-7f2424b2eafc"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
