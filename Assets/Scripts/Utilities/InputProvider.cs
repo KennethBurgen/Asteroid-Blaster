@@ -24,11 +24,11 @@ namespace Utilities
             if (_instance is not null && _instance != this)
             {
                 Debug.LogWarning(
-                    "Deleting Object -"
+                    "Deleting Component - InputProvider - on Gameobject - "
                         + gameObject.name
-                        + "- because Component InputProvider already exists."
+                        + " - because InputProvider already exists."
                 );
-                Destroy(gameObject);
+                Destroy(this);
                 return;
             }
 
