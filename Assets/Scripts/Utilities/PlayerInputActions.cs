@@ -105,12 +105,12 @@ namespace Utilities
                 },
                 {
                     ""name"": ""Fire"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""0ad577c2-217e-400e-a2fc-ea04fa31e277"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Back"",

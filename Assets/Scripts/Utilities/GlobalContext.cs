@@ -24,7 +24,7 @@ namespace Utilities
         // Globale Referenzen
         public InputProvider InputProvider { get; private set; }
 
-        public void SetInputProvider(InputProvider inputProvider)
+        public void BindInputProvider(InputProvider inputProvider)
         {
             InputProvider = inputProvider;
         }
