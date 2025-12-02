@@ -17,6 +17,8 @@ namespace Utilities
 
             // Persistent
             DontDestroyOnLoad(gameObject);
+
+            // Nächste Szene laden
         }
     }
 }
