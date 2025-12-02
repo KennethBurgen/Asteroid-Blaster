@@ -11,6 +11,7 @@ namespace Utilities
 
         void Awake()
         {
+            // Referenzen an globale Kontext binden
             _context = new GlobalContext();
             _context.BindInputProvider(inputProvider);
 
