@@ -20,5 +20,13 @@ namespace Utilities.StateMachine
                 updatableState.OnUpdate();
             }
         }
+
+        public void FixedUpdate()
+        {
+            if (_currentState is IFixedUpdatableState fixedUpdatableState)
+            {
+                fixedUpdatableState.OnFixedUpdate();
+            }
+        }
     }
 }
