@@ -26,6 +26,11 @@ namespace Utilities
 
         public void BindInputProvider(InputProvider inputProvider)
         {
+            if (!inputProvider)
+            {
+                UnityEngine.Debug.LogError("InputProvider cannot be null");
+                return;
+            }
             InputProvider = inputProvider;
         }
     }
