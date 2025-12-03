@@ -51,6 +51,10 @@ namespace Tests.EditMode.Utilities.StateMachineSystem
             _stateMachine.FixedUpdate();
 
             // Verifies
+            mockState.Verify(mock => mock.OnEnter(), Times.Once);
+            mockState.Verify(mock => mock.OnExit(), Times.Once);
+            mockState2.Verify(mock => mock.OnEnter(), Times.Once);
+
             mockState.Verify(mock => mock.OnUpdate(), Times.Once);
             mockState2.Verify(mock => mock.OnUpdate(), Times.Once);
             mockState2.Verify(mock => mock.OnFixedUpdate(), Times.Once);
