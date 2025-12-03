@@ -52,12 +52,21 @@ namespace Core.GameManagerSystem
             PlayingGameState = new PlayingGameState();
         }
 
+        /// <summary>
+        /// Verlässt den alten GameState (falls vorhanden) und wechselt in den neuen GameState und löst das <see cref="Action">OnGameStateChanged</see> event aus
+        /// </summary>
+        /// <param name="newGameState">ein GameState vom Interface <see cref="IState"/></param>
         public void ChangeGameState(IState newGameState)
         {
             _stateMachine.ChangeState(newGameState);
             OnGameStateChanged?.Invoke(newGameState);
         }
 
+        /// <summary>
+        /// Setzt einen neuen Seed, sofern dessen Bedingungen erfüllt sind
+        /// </summary>
+        /// <param name="seed">ein <see cref="int"/></param>
+        /// <returns></returns>
         public bool SetSeedSuccessful(int seed)
         {
             if (Math.Abs(seed).ToString().Length < _minSeedLength && seed == 0)
