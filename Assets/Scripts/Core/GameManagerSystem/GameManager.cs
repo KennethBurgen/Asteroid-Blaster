@@ -40,7 +40,7 @@ namespace Core.GameManagerSystem
 
         // Fields
         private int _seed;
-        private int _minSeedLength;
+        private readonly int MIN_SEED_LENGTH = 5;
         public int SEED => _seed;
 
         // Events
@@ -77,7 +77,7 @@ namespace Core.GameManagerSystem
         /// <returns></returns>
         public bool SetSeedSuccessful(int seed)
         {
-            if (Math.Abs(seed).ToString().Length < _minSeedLength && seed == 0)
+            if (Math.Abs(seed).ToString().Length < MIN_SEED_LENGTH || seed == 0)
                 return false;
 
             _seed = seed;
