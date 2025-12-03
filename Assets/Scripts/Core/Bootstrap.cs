@@ -20,6 +20,7 @@ namespace Core
 
             _gameManager = GameManager.Instance;
             _context.BindGameManager(_gameManager);
+            _gameManager.ChangeGameState(_gameManager.MainMenuGameState);
 
             // Persistent
             DontDestroyOnLoad(gameObject);
