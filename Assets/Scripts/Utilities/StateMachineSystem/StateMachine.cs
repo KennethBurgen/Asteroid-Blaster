@@ -4,7 +4,7 @@ namespace Utilities.StateMachineSystem
 {
     public class StateMachine
     {
-        private IState _currentState;
+        public IState CurrentState { get; private set; }
 
         /// <summary>
         /// Verlässt den alten State (falls vorhanden) und wechselt in den neuen State
@@ -12,9 +12,9 @@ namespace Utilities.StateMachineSystem
         /// <param name="newState">ein State vom Interface <see cref="IState"/></param>
         public void ChangeState(IState newState)
         {
-            _currentState?.OnExit();
-            _currentState = newState;
-            _currentState?.OnEnter();
+            CurrentState?.OnExit();
+            CurrentState = newState;
+            CurrentState?.OnEnter();
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Utilities.StateMachineSystem
         /// </summary>
         public void Update()
         {
-            if (_currentState is IUpdatableState updatableState)
+            if (CurrentState is IUpdatableState updatableState)
             {
                 updatableState.OnUpdate();
             }
@@ -33,7 +33,7 @@ namespace Utilities.StateMachineSystem
         /// </summary>
         public void FixedUpdate()
         {
-            if (_currentState is IFixedUpdatableState fixedUpdatableState)
+            if (CurrentState is IFixedUpdatableState fixedUpdatableState)
             {
                 fixedUpdatableState.OnFixedUpdate();
             }
