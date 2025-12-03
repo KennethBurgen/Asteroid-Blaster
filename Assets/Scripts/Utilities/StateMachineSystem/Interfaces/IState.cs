@@ -1,4 +1,4 @@
-namespace Utilities.StateMachine.Interfaces
+namespace Utilities.StateMachineSystem.Interfaces
 {
     public interface IState
     {

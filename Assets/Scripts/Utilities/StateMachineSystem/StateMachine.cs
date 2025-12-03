@@ -1,6 +1,6 @@
-using Utilities.StateMachine.Interfaces;
+using Utilities.StateMachineSystem.Interfaces;
 
-namespace Utilities.StateMachine
+namespace Utilities.StateMachineSystem
 {
     public class StateMachine
     {
