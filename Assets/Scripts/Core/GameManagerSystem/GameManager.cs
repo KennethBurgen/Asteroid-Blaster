@@ -1,6 +1,10 @@
 using System;
+using System.Runtime.CompilerServices;
 using Core.GameManagerSystem.GameStates;
 using Utilities.StateMachineSystem;
+using Utilities.StateMachineSystem.Interfaces;
+
+[assembly: InternalsVisibleTo("Tests.EditMode.Core")]
 
 namespace Core.GameManagerSystem
 {
@@ -26,7 +30,7 @@ namespace Core.GameManagerSystem
         #endregion
 
         // Referenzen
-        private readonly StateMachine _stateMachine;
+        internal IStateMachine _stateMachine;
         public IGameState CurrentGameState => (IGameState)_stateMachine.CurrentState;
 
         // GameStates
@@ -52,7 +56,7 @@ namespace Core.GameManagerSystem
         }
 
         /// <summary>
-        /// Verlässt den alten GameState (falls vorhanden) und wechselt in den neuen GameState und löst das <see cref="Action">OnGameStateChanged</see> event aus
+        /// Ruft <see cref="StateMachine.ChangeState"/> auf und löst das <see cref="Action">OnGameStateChanged</see> event aus
         /// </summary>
         /// <param name="newGameState">ein GameState vom Interface <see cref="IGameState"/></param>
         public void ChangeGameState(IGameState newGameState)
