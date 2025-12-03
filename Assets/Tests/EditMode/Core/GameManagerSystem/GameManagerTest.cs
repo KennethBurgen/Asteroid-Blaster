@@ -38,6 +38,35 @@ namespace Tests.EditMode.Core.GameManagerSystem
             _gameManager.OnGameStateChanged += _handler;
 
             var mockGameState = new Mock<IGameState>();
+            var mockGameState2 = new Mock<IGameState>();
+            _gameManager.ChangeGameState(mockGameState.Object);
+            _stateMachineMock.Setup(mock => mock.CurrentState).Returns(mockGameState.Object);
+            _gameManager.ChangeGameState(mockGameState2.Object);
+
+            // Verifies
+            _stateMachineMock.Verify(mock => mock.ChangeState(mockGameState.Object), Times.Once);
+            _stateMachineMock.Verify(mock => mock.ChangeState(mockGameState2.Object), Times.Once);
+            Assert.AreEqual(
+                2,
+                actionCounter,
+                "OnGameStateChanged event should have been called twice"
+            );
+
+            _gameManager.OnGameStateChanged -= _handler;
+        }
+
+        [Test]
+        public void CannotChangeGameStateIfSameGameState()
+        {
+            var actionCounter = 0;
+            _handler = _ => actionCounter++;
+
+            _gameManager.OnGameStateChanged += _handler;
+
+            var mockGameState = new Mock<IGameState>();
+
+            _gameManager.ChangeGameState(mockGameState.Object);
+            _stateMachineMock.Setup(mock => mock.CurrentState).Returns(mockGameState.Object);
             _gameManager.ChangeGameState(mockGameState.Object);
 
             // Verifies

@@ -61,6 +61,11 @@ namespace Core.GameManagerSystem
         /// <param name="newGameState">ein GameState vom Interface <see cref="IGameState"/></param>
         public void ChangeGameState(IGameState newGameState)
         {
+            if (CurrentGameState == newGameState)
+            {
+                return;
+            }
+
             _stateMachine.ChangeState(newGameState);
             OnGameStateChanged?.Invoke(newGameState);
         }
