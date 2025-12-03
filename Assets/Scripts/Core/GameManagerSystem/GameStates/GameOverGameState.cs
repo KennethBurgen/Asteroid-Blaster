@@ -1,8 +1,6 @@
-using Utilities.StateMachineSystem.Interfaces;
-
 namespace Core.GameManagerSystem.GameStates
 {
-    public class GameOverGameState : IState
+    public class GameOverGameState : IGameState
     {
         public void OnEnter()
         {

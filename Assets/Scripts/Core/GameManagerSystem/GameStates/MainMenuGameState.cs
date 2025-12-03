@@ -1,8 +1,6 @@
-using Utilities.StateMachineSystem.Interfaces;
-
 namespace Core.GameManagerSystem.GameStates
 {
-    public class MainMenuGameState : IState
+    public class MainMenuGameState : IGameState
     {
         public void OnEnter()
         {
