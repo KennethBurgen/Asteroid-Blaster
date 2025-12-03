@@ -5,7 +5,7 @@ using UnityEngine.TestTools;
 using Utilities.StateMachineSystem;
 using Utilities.StateMachineSystem.Interfaces;
 
-namespace Tests.EditMode.Utilities.StateMachine
+namespace Tests.EditMode.Utilities.StateMachineSystem
 {
     public class StateMachineTest
     {
