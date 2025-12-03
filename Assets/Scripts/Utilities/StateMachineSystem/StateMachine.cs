@@ -2,7 +2,7 @@ using Utilities.StateMachineSystem.Interfaces;
 
 namespace Utilities.StateMachineSystem
 {
-    public class StateMachine
+    public class StateMachine : IStateMachine
     {
         public IState CurrentState { get; private set; }
 
