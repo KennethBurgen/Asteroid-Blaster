@@ -36,6 +36,18 @@ namespace Tests.EditMode.Utilities.StateMachineSystem
         }
 
         [Test]
+        public void CannotChangeStateIfSameState()
+        {
+            var mockState = new Mock<IState>();
+
+            _stateMachine.ChangeState(mockState.Object);
+            _stateMachine.ChangeState(mockState.Object);
+
+            mockState.Verify(mock => mock.OnEnter(), Times.Once);
+            mockState.Verify(mock => mock.OnExit(), Times.Never);
+        }
+
+        [Test]
         public void CanDoAllTypesOfUpdatesOnUpdatableStates()
         {
             var mockState = new Mock<IUpdatableState>();

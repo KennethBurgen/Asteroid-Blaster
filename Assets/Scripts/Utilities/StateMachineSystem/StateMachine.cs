@@ -12,6 +12,11 @@ namespace Utilities.StateMachineSystem
         /// <param name="newState">ein State vom Interface <see cref="IState"/></param>
         public void ChangeState(IState newState)
         {
+            if (CurrentState == newState)
+            {
+                return;
+            }
+
             CurrentState?.OnExit();
             CurrentState = newState;
             CurrentState?.OnEnter();
