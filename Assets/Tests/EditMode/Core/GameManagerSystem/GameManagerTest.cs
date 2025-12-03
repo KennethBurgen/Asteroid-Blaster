@@ -75,5 +75,27 @@ namespace Tests.EditMode.Core.GameManagerSystem
 
             _gameManager.OnGameStateChanged -= _handler;
         }
+
+        [Test]
+        public void CanSetSeedSuccessfull()
+        {
+            var result = _gameManager.SetSeedSuccessful(12345);
+            var result2 = _gameManager.SetSeedSuccessful(-98765);
+
+            Assert.IsTrue(result, "First result");
+            Assert.IsTrue(result2, "Second result");
+        }
+
+        [Test]
+        public void CannotSetSeedSuccessfull()
+        {
+            var result = _gameManager.SetSeedSuccessful(00000);
+            var result2 = _gameManager.SetSeedSuccessful(-1234);
+            var result3 = _gameManager.SetSeedSuccessful(9876);
+
+            Assert.IsFalse(result, "First result");
+            Assert.IsFalse(result2, "Second result");
+            Assert.IsFalse(result3, "Third result");
+        }
     }
 }
