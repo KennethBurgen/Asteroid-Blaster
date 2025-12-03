@@ -1,7 +1,6 @@
 using System;
 using Core.GameManagerSystem.GameStates;
 using Utilities.StateMachineSystem;
-using Utilities.StateMachineSystem.Interfaces;
 
 namespace Core.GameManagerSystem
 {
@@ -28,7 +27,7 @@ namespace Core.GameManagerSystem
 
         // Referenzen
         private readonly StateMachine _stateMachine;
-        public IState CurrentGameState => _stateMachine.CurrentState;
+        public IGameState CurrentGameState => (IGameState)_stateMachine.CurrentState;
 
         // GameStates
         public MainMenuGameState MainMenuGameState { get; private set; }
@@ -41,7 +40,7 @@ namespace Core.GameManagerSystem
         public int SEED => _seed;
 
         // Events
-        public event Action<IState> OnGameStateChanged;
+        public event Action<IGameState> OnGameStateChanged;
 
         private GameManager()
         {
@@ -55,8 +54,8 @@ namespace Core.GameManagerSystem
         /// <summary>
         /// Verlässt den alten GameState (falls vorhanden) und wechselt in den neuen GameState und löst das <see cref="Action">OnGameStateChanged</see> event aus
         /// </summary>
-        /// <param name="newGameState">ein GameState vom Interface <see cref="IState"/></param>
-        public void ChangeGameState(IState newGameState)
+        /// <param name="newGameState">ein GameState vom Interface <see cref="IGameState"/></param>
+        public void ChangeGameState(IGameState newGameState)
         {
             _stateMachine.ChangeState(newGameState);
             OnGameStateChanged?.Invoke(newGameState);
