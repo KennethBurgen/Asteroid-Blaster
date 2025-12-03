@@ -6,6 +6,10 @@ namespace Utilities.StateMachineSystem
     {
         private IState _currentState;
 
+        /// <summary>
+        /// Verlässt den alten State (falls vorhanden) und wechselt in den neuen State
+        /// </summary>
+        /// <param name="newState">ein State vom Interface <see cref="IState"/></param>
         public void ChangeState(IState newState)
         {
             _currentState?.OnExit();
@@ -13,6 +17,9 @@ namespace Utilities.StateMachineSystem
             _currentState?.OnEnter();
         }
 
+        /// <summary>
+        /// Sofern der momentane State vom Interface <see cref="IUpdatableState"/> ist wird dessen <see cref="IUpdatableState.OnUpdate"/> Methode aufgerufen
+        /// </summary>
         public void Update()
         {
             if (_currentState is IUpdatableState updatableState)
@@ -21,6 +28,9 @@ namespace Utilities.StateMachineSystem
             }
         }
 
+        /// <summary>
+        /// Sofern der momentane State vom Interface <see cref="IFixedUpdatableState"/> ist wird dessen <see cref="IFixedUpdatableState.OnFixedUpdate"/> Methode aufgerufen
+        /// </summary>
         public void FixedUpdate()
         {
             if (_currentState is IFixedUpdatableState fixedUpdatableState)

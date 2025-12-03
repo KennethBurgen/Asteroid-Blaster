@@ -1,7 +1,5 @@
-using System.Collections;
 using Moq;
 using NUnit.Framework;
-using UnityEngine.TestTools;
 using Utilities.StateMachineSystem;
 using Utilities.StateMachineSystem.Interfaces;
 
