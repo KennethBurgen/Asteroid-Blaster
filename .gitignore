@@ -97,7 +97,12 @@ fabric.properties
 
 # Unity Assets im Plugin Ordner
 /[Aa]ssets/Plugins.meta
-/[Aa]ssets/Plugins
+/[Aa]ssets/Plugins/*
+
+# Moq und seine Unterordner tracken
+!/[Aa]ssets/Plugins/Moq
+!/[Aa]ssets/Plugins/Moq.meta
+!/[Aa]ssets/Plugins/Moq/**
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
