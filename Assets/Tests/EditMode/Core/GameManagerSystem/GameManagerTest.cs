@@ -1,24 +1,50 @@
-using System.Collections;
+using System;
+using Core.GameManagerSystem;
+using Moq;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
+using Utilities.StateMachineSystem.Interfaces;
 
-public class GameManagerTest
+namespace Tests.EditMode.Core.GameManagerSystem
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void GameManagerTestSimplePasses()
+    public class GameManagerTest
     {
-        // Use the Assert class to test conditions
-    }
+        private GameManager _gameManager;
+        private Mock<IStateMachine> _stateMachineMock;
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator GameManagerTestWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        private Action<IGameState> _handler;
+
+        [SetUp]
+        public void Setup()
+        {
+            _gameManager = GameManager.Instance;
+
+            _stateMachineMock = new Mock<IStateMachine>();
+            _gameManager._stateMachine = _stateMachineMock.Object;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _gameManager = null;
+            _stateMachineMock = null;
+        }
+
+        [Test]
+        public void CanChangeGameState()
+        {
+            var actionCounter = 0;
+            _handler = _ => actionCounter++;
+
+            _gameManager.OnGameStateChanged += _handler;
+
+            var mockGameState = new Mock<IGameState>();
+            _gameManager.ChangeGameState(mockGameState.Object);
+
+            // Verifies
+            _stateMachineMock.Verify(mock => mock.ChangeState(mockGameState.Object), Times.Once);
+            Assert.AreEqual(1, actionCounter, "OnGameStateChanged event should have been called");
+
+            _gameManager.OnGameStateChanged -= _handler;
+        }
     }
 }
