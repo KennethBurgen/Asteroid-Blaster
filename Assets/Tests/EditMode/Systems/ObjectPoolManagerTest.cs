@@ -88,5 +88,31 @@ namespace Tests.EditMode.Systems
                 "Inactive object same as fakeGo"
             );
         }
+
+        [Test]
+        public void DeactivateAllObjectsOk()
+        {
+            var fakeGo = new GameObject("FakeObject(Clone)");
+            var fakeGo2 = new GameObject("FakeObject2(Clone)");
+            fakeGo = ObjectPoolManager.Instance.SpawnObject(
+                fakeGo,
+                new Vector3(0, 0, 0),
+                Quaternion.identity,
+                ObjectPoolManager.PoolType.Gameobject
+            );
+            fakeGo2 = ObjectPoolManager.Instance.SpawnObject(
+                fakeGo2,
+                new Vector3(1, 1, 1),
+                Quaternion.identity,
+                ObjectPoolManager.PoolType.Gameobject
+            );
+
+            Assert.AreEqual(true, fakeGo.activeInHierarchy, "Gameobject is active");
+            Assert.AreEqual(true, fakeGo2.activeInHierarchy, "Gameobject 2 is active");
+
+            ObjectPoolManager.Instance.DeactivateAllObjects();
+            Assert.AreEqual(false, fakeGo.activeInHierarchy, "Gameobject is not active");
+            Assert.AreEqual(false, fakeGo2.activeInHierarchy, "Gameobject 2 is not active");
+        }
     }
 }
