@@ -40,7 +40,7 @@ namespace Core.GameManagerSystem
 
         // Fields
         private int _seed;
-        private readonly int MIN_SEED_LENGTH = 5;
+        private const int MIN_SEED_LENGTH = 5;
         public int SEED => _seed;
 
         // Events
