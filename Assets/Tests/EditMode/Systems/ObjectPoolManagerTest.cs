@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 using NUnit.Framework;
 using Systems;
 using UnityEngine;
@@ -47,17 +47,46 @@ namespace Tests.EditMode.Systems
         [Test]
         public void ReturnObjectToPoolNoMatchingPool()
         {
-            var fakeGO = new GameObject("FakeObject(Clone)");
-            fakeGO.SetActive(true);
+            var fakeGo = new GameObject("FakeObject(Clone)");
+            fakeGo.SetActive(true);
 
             LogAssert.Expect(
                 LogType.Warning,
-                "Trying to release an object that is not pooled: " + fakeGO.name
+                "Trying to release an object that is not pooled: " + fakeGo.name
             );
 
-            ObjectPoolManager.Instance.ReturnObjectToPool(fakeGO);
+            ObjectPoolManager.Instance.ReturnObjectToPool(fakeGo);
 
-            Assert.AreEqual(fakeGO.activeInHierarchy, true, "Gameobject is still active");
+            Assert.AreEqual(true, fakeGo.activeInHierarchy, "Gameobject is still active");
+        }
+
+        [Test]
+        public void ReturnObjectToPoolWithMatchingPool()
+        {
+            var fakeGo = new GameObject("FakeObject(Clone)");
+            fakeGo.SetActive(true);
+
+            var objectPool = ObjectPoolManager.Instance.FindOrCreateObjectPool(
+                fakeGo.name.Substring(0, fakeGo.name.Length - 7)
+            );
+
+            ObjectPoolManager.Instance.ReturnObjectToPool(fakeGo);
+
+            Assert.AreEqual(false, fakeGo.activeInHierarchy, "Gameobject is not active");
+            Assert.IsNotEmpty(
+                objectPool.InactiveObjects,
+                "ObjectPool inactive objects list not empty"
+            );
+            Assert.AreEqual(
+                fakeGo.name.Substring(0, fakeGo.name.Length - 7),
+                objectPool.LookupString,
+                "LookupString named correctly"
+            );
+            Assert.AreEqual(
+                fakeGo.name,
+                objectPool.InactiveObjects.First().name,
+                "Inactive object same as fakeGo"
+            );
         }
     }
 }
