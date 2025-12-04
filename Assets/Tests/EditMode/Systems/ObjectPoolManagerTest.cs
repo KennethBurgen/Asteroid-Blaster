@@ -114,5 +114,30 @@ namespace Tests.EditMode.Systems
             Assert.AreEqual(false, fakeGo.activeInHierarchy, "Gameobject is not active");
             Assert.AreEqual(false, fakeGo2.activeInHierarchy, "Gameobject 2 is not active");
         }
+
+        [Test]
+        public void SpawnObjectNoInactiveObjectsOk()
+        {
+            var position = new Vector3(0, 0, 0);
+            var rotation = Quaternion.identity;
+
+            var fakeGo = new GameObject("FakeObject(Clone)");
+            fakeGo = ObjectPoolManager.Instance.SpawnObject(
+                fakeGo,
+                position,
+                rotation,
+                ObjectPoolManager.PoolType.Gameobject
+            );
+
+            Assert.AreEqual(
+                ObjectPoolManager._gameObjectsEmpty,
+                fakeGo.transform.parent.gameObject,
+                "Gameobject has correct parent"
+            );
+
+            Assert.AreEqual(position, fakeGo.transform.position, "Gameobject position matches");
+            Assert.AreEqual(rotation, fakeGo.transform.rotation, "Gameobject rotation matches");
+            Assert.AreEqual(true, fakeGo.activeInHierarchy, "Gameobject is active");
+        }
     }
 }
