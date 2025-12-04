@@ -37,11 +37,14 @@ namespace Utilities
 
         #endregion
 
-        private void OnEnable()
+        void Awake()
         {
             InitializeSingleton();
-
             _playerInputActions ??= new PlayerInputActions();
+        }
+
+        private void OnEnable()
+        {
             _playerInputActions.Enable();
         }
 
