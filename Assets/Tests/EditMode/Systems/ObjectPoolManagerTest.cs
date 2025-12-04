@@ -141,5 +141,46 @@ namespace Tests.EditMode.Systems
             Assert.AreEqual(rotation, fakeGo.transform.rotation, "Gameobject rotation matches");
             Assert.AreEqual(true, fakeGo.activeInHierarchy, "Gameobject is active");
         }
+
+        [Test]
+        public void SpawnObjectFromInactiveObjectsOk()
+        {
+            var position = new Vector3(0, 0, 0);
+            var rotation = Quaternion.identity;
+
+            var inactiveObj = new GameObject("FakeObject(Clone)");
+            inactiveObj = ObjectPoolManager.Instance.SpawnObject(
+                inactiveObj,
+                position,
+                rotation,
+                ObjectPoolManager.PoolType.Gameobject
+            );
+
+            ObjectPoolManager.Instance.ReturnObjectToPool(inactiveObj);
+            Assert.AreEqual(false, inactiveObj.activeInHierarchy, "Gameobject is not active");
+
+            var objectPool = ObjectPoolManager.Instance.FindOrCreateObjectPool(
+                inactiveObj.name.Substring(0, inactiveObj.name.Length - 7)
+            );
+            Assert.AreEqual(
+                inactiveObj.name,
+                objectPool.InactiveObjects.First().name,
+                "Inactive object same as inactiveObj"
+            );
+
+            var fakeGo = new GameObject("FakeObject(Clone)");
+            fakeGo = ObjectPoolManager.Instance.SpawnObject(
+                fakeGo,
+                position,
+                rotation,
+                ObjectPoolManager.PoolType.Gameobject
+            );
+
+            Assert.AreEqual(inactiveObj, fakeGo, "Inactive object becomes reactivated");
+
+            Assert.AreEqual(position, fakeGo.transform.position, "Gameobject position matches");
+            Assert.AreEqual(rotation, fakeGo.transform.rotation, "Gameobject rotation matches");
+            Assert.AreEqual(true, fakeGo.activeInHierarchy, "Gameobject is active");
+        }
     }
 }
