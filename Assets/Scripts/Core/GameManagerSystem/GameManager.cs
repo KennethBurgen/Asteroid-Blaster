@@ -41,7 +41,7 @@ namespace Core.GameManagerSystem
         // Fields
         private int _seed;
         private const int MIN_SEED_LENGTH = 5;
-        public int SEED => _seed;
+        public int Seed => _seed;
 
         // Events
         public event Action<IGameState> OnGameStateChanged;
@@ -77,7 +77,14 @@ namespace Core.GameManagerSystem
         /// <returns></returns>
         public bool SetSeedSuccessful(int seed)
         {
-            if (Math.Abs(seed).ToString().Length < MIN_SEED_LENGTH || seed == 0)
+            // Guard specific int range
+            if (seed is 0 or int.MinValue)
+            {
+                return false;
+            }
+
+            var digitCount = Math.Abs(seed).ToString().Length;
+            if (digitCount < MIN_SEED_LENGTH)
                 return false;
 
             _seed = seed;
