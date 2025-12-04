@@ -82,6 +82,25 @@ namespace Systems
             };
         }
 
+        /// <summary>
+        /// Sucht den <see cref="PooledObjectInfo">ObjectPool</see>, falls keiner vorhanden ist, wird einer erstellt
+        /// </summary>
+        /// <param name="objectName">der Name des Objekts als <see cref="string"/></param>
+        /// <returns><see cref="PooledObjectInfo"/></returns>
+        internal PooledObjectInfo FindOrCreateObjectPool(string objectName)
+        {
+            PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == objectName);
+
+            // Wenn der Pool nicht existiert wird er erstellt
+            if (pool == null)
+            {
+                pool = new PooledObjectInfo() { LookupString = objectName };
+                ObjectPools.Add(pool);
+            }
+
+            return pool;
+        }
+
         #endregion
 
         #region Spawning und Deactivating
@@ -101,14 +120,7 @@ namespace Systems
             PoolType poolType = PoolType.None
         )
         {
-            PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == objectToSpawn.name);
-
-            // Wenn der Pool nicht existiert wird er erstellt
-            if (pool == null)
-            {
-                pool = new PooledObjectInfo() { LookupString = objectToSpawn.name };
-                ObjectPools.Add(pool);
-            }
+            PooledObjectInfo pool = FindOrCreateObjectPool(objectToSpawn.name);
 
             // Prüfen ob es inactive Objekte in diesem Pool gibt
             GameObject spawnableObj = pool.InactiveObjects.FirstOrDefault();
