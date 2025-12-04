@@ -4,7 +4,7 @@ namespace Utilities
 {
     public class InputProvider : MonoBehaviour
     {
-        private static InputProvider _instance;
+        public static InputProvider Instance { get; private set; }
         private PlayerInputActions _playerInputActions;
 
         public Vector2 MoveInput =>
@@ -21,7 +21,7 @@ namespace Utilities
         /// </summary>
         private void InitializeSingleton()
         {
-            if (_instance is not null && _instance != this)
+            if (Instance is not null && Instance != this)
             {
                 Debug.LogWarning(
                     "Deleting Component - InputProvider - on Gameobject - "
@@ -32,7 +32,7 @@ namespace Utilities
                 return;
             }
 
-            _instance = this;
+            Instance = this;
         }
 
         #endregion
