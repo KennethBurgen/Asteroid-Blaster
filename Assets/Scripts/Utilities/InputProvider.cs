@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Utilities
 {
+    /// <summary>
+    /// Der InputProvider hängt als Komponente am Bootstrap-Objekt
+    /// </summary>
     public class InputProvider : MonoBehaviour
     {
         public static InputProvider Instance { get; private set; }
@@ -33,6 +36,9 @@ namespace Utilities
             }
 
             Instance = this;
+
+            // Object an dem der InputProvider hängt persistent über Szenen machen
+            DontDestroyOnLoad(gameObject);
         }
 
         #endregion
