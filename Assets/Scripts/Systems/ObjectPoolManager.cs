@@ -187,6 +187,9 @@ namespace Systems
         #endregion
 
 #if UNITY_INCLUDE_TESTS
+        /// <summary>
+        /// Um im Test die Singleton-Instanz des <see cref="ObjectPoolManager"/> zu löschen
+        /// </summary>
         internal static void ResetSingletonForTests()
         {
             Instance = null;
