@@ -1,4 +1,7 @@
-namespace Utilities
+using Core.GameManagerSystem;
+using Utilities;
+
+namespace Core
 {
     public class GlobalContext
     {
@@ -23,9 +26,10 @@ namespace Utilities
 
         // Globale Referenzen
         public InputProvider InputProvider { get; private set; }
+        public GameManager GameManager { get; private set; }
 
         /// <summary>
-        /// Bindet einen InputProvider an den globalen Kontext
+        /// Bindet einen InputProvider an den <see cref="GlobalContext"/>
         /// </summary>
         /// <param name="inputProvider">ein <see cref="InputProvider"/></param>
         public void BindInputProvider(InputProvider inputProvider)
@@ -36,6 +40,20 @@ namespace Utilities
                 return;
             }
             InputProvider = inputProvider;
+        }
+
+        /// <summary>
+        /// Bindet einen GameManager an den <see cref="GlobalContext"/>
+        /// </summary>
+        /// <param name="gameManager">ein <see cref="GameManager"/></param>
+        public void BindGameManager(GameManager gameManager)
+        {
+            if (gameManager == null)
+            {
+                UnityEngine.Debug.LogError("GameManager cannot be null");
+                return;
+            }
+            GameManager = gameManager;
         }
     }
 }

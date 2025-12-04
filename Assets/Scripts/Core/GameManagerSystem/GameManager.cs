@@ -1,0 +1,94 @@
+using System;
+using System.Runtime.CompilerServices;
+using Core.GameManagerSystem.GameStates;
+using Utilities.StateMachineSystem;
+using Utilities.StateMachineSystem.Interfaces;
+
+[assembly: InternalsVisibleTo("Tests.EditMode.Core")]
+
+namespace Core.GameManagerSystem
+{
+    public class GameManager
+    {
+        #region Singleton
+
+        private static GameManager _instance;
+
+        public static GameManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new GameManager();
+                }
+
+                return _instance;
+            }
+        }
+
+        #endregion
+
+        // Referenzen
+        internal IStateMachine _stateMachine;
+        public IGameState CurrentGameState => (IGameState)_stateMachine.CurrentState;
+
+        // GameStates
+        public MainMenuGameState MainMenuGameState { get; private set; }
+        public GameOverGameState GameOverGameState { get; private set; }
+        public PlayingGameState PlayingGameState { get; private set; }
+
+        // Fields
+        private int _seed;
+        private const int MIN_SEED_LENGTH = 5;
+        public int Seed => _seed;
+
+        // Events
+        public event Action<IGameState> OnGameStateChanged;
+
+        private GameManager()
+        {
+            _stateMachine = new StateMachine();
+            // GameStates
+            MainMenuGameState = new MainMenuGameState();
+            GameOverGameState = new GameOverGameState();
+            PlayingGameState = new PlayingGameState();
+        }
+
+        /// <summary>
+        /// Ruft <see cref="StateMachine.ChangeState"/> auf und löst das <see cref="Action">OnGameStateChanged</see> event aus
+        /// </summary>
+        /// <param name="newGameState">ein GameState vom Interface <see cref="IGameState"/></param>
+        public void ChangeGameState(IGameState newGameState)
+        {
+            if (CurrentGameState == newGameState)
+            {
+                return;
+            }
+
+            _stateMachine.ChangeState(newGameState);
+            OnGameStateChanged?.Invoke(newGameState);
+        }
+
+        /// <summary>
+        /// Setzt einen neuen Seed, sofern dessen Bedingungen erfüllt sind
+        /// </summary>
+        /// <param name="seed">ein <see cref="int"/></param>
+        /// <returns></returns>
+        public bool SetSeedSuccessful(int seed)
+        {
+            // Guard specific int range
+            if (seed is 0 or int.MinValue)
+            {
+                return false;
+            }
+
+            var digitCount = Math.Abs(seed).ToString().Length;
+            if (digitCount < MIN_SEED_LENGTH)
+                return false;
+
+            _seed = seed;
+            return true;
+        }
+    }
+}
