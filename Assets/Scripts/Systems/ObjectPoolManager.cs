@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+[assembly: InternalsVisibleTo("Tests.EditMode.Systems")]
 
 namespace Systems
 {
@@ -15,7 +18,7 @@ namespace Systems
 
         // Hierarchie organisation
         private GameObject _objectPoolEmptyHolder;
-        private static GameObject _gameObjectsEmpty;
+        internal static GameObject _gameObjectsEmpty;
 
         public enum PoolType
         {
@@ -28,7 +31,7 @@ namespace Systems
         /// <summary>
         /// Stellt sicher, dass der InputProvider nur einmal existiert - Singleton
         /// </summary>
-        private void InitializeSingleton()
+        internal void InitializeSingleton()
         {
             if (Instance is not null && Instance != this)
             {
@@ -56,7 +59,7 @@ namespace Systems
         /// <summary>
         /// Erstellt die Parent-Gameobjects zur Organisation der gepoolten Objekte
         /// </summary>
-        private void SetupEmpties()
+        internal void SetupEmpties()
         {
             _objectPoolEmptyHolder = new GameObject("Pooled Objects");
 
@@ -69,7 +72,7 @@ namespace Systems
         /// </summary>
         /// <param name="poolType">der <see cref="PoolType"/></param>
         /// <returns></returns>
-        private GameObject SetParentObject(PoolType poolType)
+        internal GameObject GetParentObject(PoolType poolType)
         {
             return poolType switch
             {
@@ -113,7 +116,7 @@ namespace Systems
             if (!spawnableObj)
             {
                 // Suche das organisatorische Parent-Gameobject zum übergebenen GameObject
-                GameObject parentObject = SetParentObject(poolType);
+                GameObject parentObject = GetParentObject(poolType);
 
                 // Wenn es keine inaktiven Gameobjects gibt wird eines erstellt
                 spawnableObj = Instantiate(objectToSpawn, spawnPosition, spawnRotation);
@@ -170,6 +173,13 @@ namespace Systems
         }
 
         #endregion
+
+#if UNITY_INCLUDE_TESTS
+        internal static void ResetSingletonForTests()
+        {
+            Instance = null;
+        }
+#endif
     }
 }
 
