@@ -2,9 +2,12 @@ using UnityEngine;
 
 namespace Utilities
 {
+    /// <summary>
+    /// Der InputProvider hängt als Komponente am Bootstrap-Objekt
+    /// </summary>
     public class InputProvider : MonoBehaviour
     {
-        private static InputProvider _instance;
+        public static InputProvider Instance { get; private set; }
         private PlayerInputActions _playerInputActions;
 
         public Vector2 MoveInput =>
@@ -21,7 +24,7 @@ namespace Utilities
         /// </summary>
         private void InitializeSingleton()
         {
-            if (_instance is not null && _instance != this)
+            if (Instance != null && Instance != this)
             {
                 Debug.LogWarning(
                     "Deleting Component - InputProvider - on Gameobject - "
@@ -32,16 +35,22 @@ namespace Utilities
                 return;
             }
 
-            _instance = this;
+            Instance = this;
+
+            // Object an dem der InputProvider hängt persistent über Szenen machen
+            DontDestroyOnLoad(gameObject);
         }
 
         #endregion
 
-        private void OnEnable()
+        void Awake()
         {
             InitializeSingleton();
-
             _playerInputActions ??= new PlayerInputActions();
+        }
+
+        private void OnEnable()
+        {
             _playerInputActions.Enable();
         }
 
