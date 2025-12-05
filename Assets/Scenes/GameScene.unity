@@ -163,6 +163,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a8a68115e75e4ea98de15ca326c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Systems::Systems.ObjectPoolManager
+--- !u!1 &1325149840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325149843}
+  - component: {fileID: 1325149842}
+  - component: {fileID: 1325149841}
+  m_Layer: 0
+  m_Name: BootstrapObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1325149841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325149840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe21fb94c25e0745a0941dbeb6579f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Utilities::Utilities.InputProvider
+--- !u!114 &1325149842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325149840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 880a2c83213392f47ace5a19eb8ef586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Utilities::Utilities.Bootstrap
+  inputProvider: {fileID: 1325149841}
+--- !u!4 &1325149843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325149840}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351769158
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +369,7 @@ GameObject:
   - component: {fileID: 1573685111}
   - component: {fileID: 1573685110}
   - component: {fileID: 1573685112}
+  - component: {fileID: 1573685113}
   m_Layer: 0
   m_Name: SpaceshipObj
   m_TagString: Untagged
@@ -418,6 +477,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1573685113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573685109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd18c3826b7f344091f0aec427e363e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Player::Player.PlayerManager
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -425,3 +496,4 @@ SceneRoots:
   - {fileID: 1351769161}
   - {fileID: 1318947816}
   - {fileID: 1573685111}
+  - {fileID: 1325149843}

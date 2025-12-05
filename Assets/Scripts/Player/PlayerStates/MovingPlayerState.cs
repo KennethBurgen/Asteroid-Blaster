@@ -1,3 +1,4 @@
+using UnityEngine;
 using Utilities.StateMachineSystem.Interfaces;
 
 namespace Player.PlayerStates
@@ -6,7 +7,7 @@ namespace Player.PlayerStates
     {
         public void OnEnter()
         {
-            // to be done
+            Debug.Log("Entering Moving");
         }
 
         public void OnExit()
