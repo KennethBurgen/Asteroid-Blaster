@@ -204,7 +204,7 @@ namespace Systems
         }
 
         /// <summary>
-        /// Deaktiviert alle Gameobjects die der <see cref="ObjectPoolManager"/> verwaltet
+        /// Deaktiviert alle Gameobjects vom <see cref="PoolType.Gameobject">PoolType.Gameobject</see> die der <see cref="ObjectPoolManager"/> verwaltet
         /// </summary>
         public void DeactivateAllObjects()
         {
