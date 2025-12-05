@@ -49,7 +49,9 @@ namespace Tests.EditMode.Systems
         [Test]
         public void ReturnObjectToPoolNoMatchingPool()
         {
-            var fakeGo = new GameObject("FakeObject(Clone)");
+            ObjectPoolManager.Instance._prefabSubfix = "(Clone)";
+
+            var fakeGo = new GameObject("FakeObject");
             fakeGo.SetActive(true);
 
             LogAssert.Expect(
@@ -65,6 +67,8 @@ namespace Tests.EditMode.Systems
         [Test]
         public void ReturnObjectToPoolWithMatchingPool()
         {
+            ObjectPoolManager.Instance._prefabSubfix = "(Clone)";
+
             var fakeGo = new GameObject("FakeObject(Clone)");
             fakeGo.SetActive(true);
 
@@ -94,8 +98,8 @@ namespace Tests.EditMode.Systems
         [Test]
         public void DeactivateAllObjectsOk()
         {
-            var fakeGo = new GameObject("FakeObject(Clone)");
-            var fakeGo2 = new GameObject("FakeObject2(Clone)");
+            var fakeGo = new GameObject("FakeObject");
+            var fakeGo2 = new GameObject("FakeObject2");
             fakeGo = ObjectPoolManager.Instance.SpawnObject(
                 fakeGo,
                 new Vector3(0, 0, 0),
@@ -123,7 +127,7 @@ namespace Tests.EditMode.Systems
             var position = new Vector3(0, 0, 0);
             var rotation = Quaternion.identity;
 
-            var fakeGo = new GameObject("FakeObject(Clone)");
+            var fakeGo = new GameObject("FakeObject");
             fakeGo = ObjectPoolManager.Instance.SpawnObject(
                 fakeGo,
                 position,
@@ -145,10 +149,12 @@ namespace Tests.EditMode.Systems
         [Test]
         public void SpawnObjectFromInactiveObjectsOk()
         {
+            ObjectPoolManager.Instance._prefabSubfix = "(Clone)";
+
             var position = new Vector3(0, 0, 0);
             var rotation = Quaternion.identity;
 
-            var inactiveObj = new GameObject("FakeObject(Clone)");
+            var inactiveObj = new GameObject("FakeObject");
             inactiveObj = ObjectPoolManager.Instance.SpawnObject(
                 inactiveObj,
                 position,
@@ -168,7 +174,7 @@ namespace Tests.EditMode.Systems
                 "Inactive object same as inactiveObj"
             );
 
-            var fakeGo = new GameObject("FakeObject(Clone)");
+            var fakeGo = new GameObject("FakeObject");
             fakeGo = ObjectPoolManager.Instance.SpawnObject(
                 fakeGo,
                 position,

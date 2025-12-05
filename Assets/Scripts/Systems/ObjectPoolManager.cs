@@ -21,6 +21,7 @@ namespace Systems
         // Hierarchie organisation
         private GameObject _objectPoolEmptyHolder;
         internal static GameObject _gameObjectsEmpty;
+        internal string _prefabSubfix;
 
         public enum PoolType
         {
@@ -135,6 +136,9 @@ namespace Systems
                 // Wenn es keine inaktiven Gameobjects gibt wird eines erstellt
                 spawnableObj = Instantiate(objectToSpawn, spawnPosition, spawnRotation);
 
+                // lese den prefabSubfix der bei Instantiate eines Prefabs entsteht
+                _prefabSubfix = spawnableObj.name.Replace(objectToSpawn.name, "").Trim();
+
                 // Wenn es ein organisatiorisches Parent-Gameobject gibt, weise es zu
                 if (parentObject)
                 {
@@ -160,7 +164,11 @@ namespace Systems
         public void ReturnObjectToPool(GameObject obj)
         {
             // Substring - (Clone) - eines per Instantiate erstellten Objects rausfiltern
-            string goName = obj.name.Substring(0, obj.name.Length - 7);
+            string goName = obj.name;
+            if (goName.EndsWith(_prefabSubfix))
+            {
+                goName = goName.Replace(_prefabSubfix, "");
+            }
 
             PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
 
