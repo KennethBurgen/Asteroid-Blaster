@@ -8,42 +8,22 @@ namespace Player
         [SerializeField]
         private Rigidbody2D playerRigidBody;
 
-        private float _movementSpeed = 6f;
-        private Vector2 _movement;
+        private float _movementSpeed = 10f;
 
-        private Vector2 _movementInputSmoothVelocity;
-        private Vector2 _smoothedMovementInput;
-
-        public void Update()
+        public void MovePlayer(Vector2 movement)
         {
-            _movement = InputProvider.Instance.MoveInput;
+            // Bewegung auf nur horizontal beschränken
+            movement = new Vector2(movement.x, 0);
 
-            SpeedControl();
-        }
-
-        public void FixedUpdate()
-        {
-            MovePlayer();
-        }
-
-        public void MovePlayer()
-        {
-            // Vector2 targetVelocity = new Vector2(horizontal * _movementSpeed, 0);
-            // playerRigidBody.linearVelocity = Vector2.Lerp(
-            //     playerRigidBody.linearVelocity,
-            //     targetVelocity,
-            //     20f * Time.fixedDeltaTime
-            // );
-
-            if (_movement == Vector2.zero)
+            if (movement == Vector2.zero)
             {
                 playerRigidBody.linearVelocity = Vector2.zero;
             }
 
-            playerRigidBody.AddForce(_movement * (_movementSpeed * 10f), ForceMode2D.Force);
+            playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
         }
 
-        private void SpeedControl()
+        public void SpeedControl()
         {
             Vector2 flatVel = new Vector2(
                 playerRigidBody.linearVelocity.x,

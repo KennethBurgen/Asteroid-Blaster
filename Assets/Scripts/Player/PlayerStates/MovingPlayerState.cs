@@ -9,6 +9,8 @@ namespace Player.PlayerStates
         private readonly PlayerManager _playerManager;
         private readonly PlayerController _playerController;
 
+        private Vector2 _movement;
+
         public MovingPlayerState(PlayerManager playerManager, PlayerController playerController)
         {
             _playerManager = playerManager;
@@ -29,15 +31,14 @@ namespace Player.PlayerStates
         public void OnUpdate()
         {
             // to be done
+            _movement = InputProvider.Instance.MoveInput;
+
+            _playerController.SpeedControl();
         }
 
         public void OnFixedUpdate()
         {
-            Vector2 movement = InputProvider.Instance.MoveInput;
-            if (movement != Vector2.zero)
-            {
-                _playerController.MovePlayer();
-            }
+            _playerController.MovePlayer(_movement);
 
             CheckTransition();
         }

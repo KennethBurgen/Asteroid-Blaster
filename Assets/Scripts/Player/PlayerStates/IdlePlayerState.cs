@@ -19,7 +19,7 @@ namespace Player.PlayerStates
         {
             // to be done
             Debug.Log("Entered IdlePlayerState");
-            _playerController.MovePlayer();
+            _playerController.MovePlayer(Vector2.zero);
         }
 
         public void OnExit()
@@ -44,6 +44,9 @@ namespace Player.PlayerStates
             if (InputProvider.Instance.MoveInput != Vector2.zero)
             {
                 _playerManager.ChangePlayerState(_playerManager.MovingPlayerState);
+
+                // Damit sich der Spieler direkt bewegt und keine frames zwischen Eingabe und erstem Update in MovingState zu verlieren
+                _playerController.MovePlayer(InputProvider.Instance.MoveInput);
             }
         }
     }
