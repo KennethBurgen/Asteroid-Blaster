@@ -23,5 +23,10 @@ namespace Player.PlayerStates
         {
             // to be done
         }
+
+        public void CheckTransition()
+        {
+            // to be done
+        }
     }
 }

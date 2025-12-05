@@ -1,14 +1,24 @@
+using Player.PlayerStates;
 using UnityEngine;
 using Utilities.StateMachineSystem;
 using Utilities.StateMachineSystem.Interfaces;
 
-public class PlayerManager : MonoBehaviour
+namespace Player
 {
-    // Referenzen
-    internal IStateMachine _stateMachine;
-
-    private void Awake()
+    public class PlayerManager : MonoBehaviour
     {
-        _stateMachine = new StateMachine();
+        // Referenzen
+        internal IStateMachine _stateMachine;
+
+        // PlayerStates
+        public IdlePlayerState IdlePlayerState { get; private set; }
+        public MovingPlayerState MovingPlayerState { get; private set; }
+
+        private void Awake()
+        {
+            _stateMachine = new StateMachine();
+            IdlePlayerState = new IdlePlayerState();
+            MovingPlayerState = new MovingPlayerState();
+        }
     }
 }
