@@ -190,7 +190,10 @@ namespace Systems
             else
             {
                 obj.SetActive(false);
-                pool.InactiveObjects.Add(obj);
+                if (!pool.InactiveObjects.Contains(obj))
+                {
+                    pool.InactiveObjects.Add(obj);
+                }
             }
         }
 
