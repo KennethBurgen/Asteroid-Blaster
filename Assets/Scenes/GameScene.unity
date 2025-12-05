@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Player::Player.PlayerController
   playerRigidBody: {fileID: 1573685112}
+  camera: {fileID: 1351769160}
 --- !u!114 &1573685115
 MonoBehaviour:
   m_ObjectHideFlags: 0

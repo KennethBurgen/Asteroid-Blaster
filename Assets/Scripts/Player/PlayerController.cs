@@ -1,5 +1,4 @@
 using UnityEngine;
-using Utilities;
 
 namespace Player
 {
@@ -8,8 +7,25 @@ namespace Player
         [SerializeField]
         private Rigidbody2D playerRigidBody;
 
-        private float _movementSpeed = 10f;
+        [SerializeField]
+        private new Camera camera;
 
+        private readonly float _movementSpeed = 10f;
+
+        private float _leftBound,
+            _rightBound;
+
+        void Awake()
+        {
+            _leftBound = camera.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x + 0.32f;
+            _rightBound = camera.ViewportToWorldPoint(new Vector3(1, 0.5f, 0)).x;
+            Debug.Log(_leftBound);
+        }
+
+        /// <summary>
+        /// Bewegt den Spieler horizontal innerhalb der Kamera-Grenzen
+        /// </summary>
+        /// <param name="movement">die Bewegungsrichtung als <see cref="Vector2"/></param>
         public void MovePlayer(Vector2 movement)
         {
             // Bewegung auf nur horizontal beschränken
@@ -20,9 +36,34 @@ namespace Player
                 playerRigidBody.linearVelocity = Vector2.zero;
             }
 
-            playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
+            // Bewegung an Boundary verhindern
+            if (playerRigidBody.position.x <= _leftBound && movement.x < 0)
+            {
+                Vector2 vel = playerRigidBody.linearVelocity;
+                if (vel.x < 0)
+                {
+                    vel.x = 0;
+                }
+                playerRigidBody.linearVelocity = vel;
+            }
+            else if (playerRigidBody.position.x >= _rightBound && movement.x > 0)
+            {
+                Vector2 vel = playerRigidBody.linearVelocity;
+                if (vel.x > 0)
+                {
+                    vel.x = 0;
+                }
+                playerRigidBody.linearVelocity = vel;
+            }
+            else
+            {
+                playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
+            }
         }
 
+        /// <summary>
+        /// Verhindert das sich der Spieler schneller als die <see cref="_movementSpeed">maximale Geschwindigkeit</see> bewegt
+        /// </summary>
         public void SpeedControl()
         {
             Vector2 flatVel = new Vector2(

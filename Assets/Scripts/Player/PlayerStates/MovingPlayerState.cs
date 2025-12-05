@@ -43,6 +43,9 @@ namespace Player.PlayerStates
             CheckTransition();
         }
 
+        /// <summary>
+        /// Prüft die Bedingungen ob zu einem anderen möglichen PlayerState gewechselt werden kann
+        /// </summary>
         public void CheckTransition()
         {
             // Idle
