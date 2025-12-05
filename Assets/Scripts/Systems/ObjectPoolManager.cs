@@ -36,7 +36,7 @@ namespace Systems
         /// </summary>
         internal void InitializeSingleton()
         {
-            if (Instance is not null && Instance != this)
+            if (Instance != null && Instance != this)
             {
                 Debug.LogWarning(
                     "Deleting Component - ObjectPoolManager - on Gameobject - "

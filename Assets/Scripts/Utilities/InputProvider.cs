@@ -24,7 +24,7 @@ namespace Utilities
         /// </summary>
         private void InitializeSingleton()
         {
-            if (Instance is not null && Instance != this)
+            if (Instance != null && Instance != this)
             {
                 Debug.LogWarning(
                     "Deleting Component - InputProvider - on Gameobject - "
