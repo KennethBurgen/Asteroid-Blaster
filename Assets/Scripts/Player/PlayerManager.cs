@@ -1,3 +1,4 @@
+using System;
 using Player.PlayerStates;
 using UnityEngine;
 using Utilities.StateMachineSystem;
@@ -8,7 +9,7 @@ namespace Player
     public class PlayerManager : MonoBehaviour
     {
         // Referenzen
-        internal IStateMachine _stateMachine;
+        private IStateMachine _stateMachine;
 
         // PlayerStates
         public IdlePlayerState IdlePlayerState { get; private set; }
@@ -17,8 +18,29 @@ namespace Player
         private void Awake()
         {
             _stateMachine = new StateMachine();
-            IdlePlayerState = new IdlePlayerState();
+            IdlePlayerState = new IdlePlayerState(this);
             MovingPlayerState = new MovingPlayerState();
+
+            _stateMachine.ChangeState(IdlePlayerState);
+        }
+
+        public void Update()
+        {
+            _stateMachine.Update();
+        }
+
+        public void FixedUpdate()
+        {
+            _stateMachine.FixedUpdate();
+        }
+
+        /// <summary>
+        /// Ruft <see cref="StateMachine.ChangeState"/>
+        /// </summary>
+        /// <param name="newPlayerState">ein PlayerState vom Interface <see cref="IUpdatableState"/></param>
+        public void ChangePlayerState(IUpdatableState newPlayerState)
+        {
+            _stateMachine.ChangeState(newPlayerState);
         }
     }
 }
