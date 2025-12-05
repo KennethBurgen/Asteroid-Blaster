@@ -36,7 +36,7 @@ namespace Player.PlayerStates
         public void CheckTransition()
         {
             // Moving
-            if (InputProvider.Instance.MoveInput != UnityEngine.Vector2.zero)
+            if (InputProvider.Instance.MoveInput != Vector2.zero)
             {
                 _playerManager.ChangePlayerState(_playerManager.MovingPlayerState);
             }

@@ -10,6 +10,7 @@ namespace Player
     {
         // Referenzen
         private IStateMachine _stateMachine;
+        private PlayerController _playerController;
 
         // PlayerStates
         public IdlePlayerState IdlePlayerState { get; private set; }
@@ -18,8 +19,10 @@ namespace Player
         private void Awake()
         {
             _stateMachine = new StateMachine();
+            _playerController = GetComponent<PlayerController>();
+
             IdlePlayerState = new IdlePlayerState(this);
-            MovingPlayerState = new MovingPlayerState();
+            MovingPlayerState = new MovingPlayerState(this, _playerController);
 
             _stateMachine.ChangeState(IdlePlayerState);
         }
