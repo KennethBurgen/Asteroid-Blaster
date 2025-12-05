@@ -55,6 +55,7 @@ namespace Systems
         void Awake()
         {
             InitializeSingleton();
+            SetupEmpties();
         }
 
         #region Organisation
