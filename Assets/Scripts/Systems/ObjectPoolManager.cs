@@ -32,7 +32,7 @@ namespace Systems
         #region Singleton
 
         /// <summary>
-        /// Stellt sicher, dass der InputProvider nur einmal existiert - Singleton
+        /// Stellt sicher, dass der ObjectPoolManager nur einmal existiert - Singleton
         /// </summary>
         internal void InitializeSingleton()
         {
@@ -124,6 +124,12 @@ namespace Systems
             PoolType poolType = PoolType.None
         )
         {
+            if (!objectToSpawn)
+            {
+                Debug.LogError("Cannot spawn a null object");
+                return null;
+            }
+
             PooledObjectInfo pool = FindOrCreateObjectPool(objectToSpawn.name);
 
             // Prüfen ob es inactive Objekte in diesem Pool gibt
