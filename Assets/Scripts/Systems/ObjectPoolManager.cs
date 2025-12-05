@@ -14,7 +14,9 @@ namespace Systems
     {
         public static ObjectPoolManager Instance { get; private set; }
 
-        public static List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
+        internal static List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
+        public static IReadOnlyList<PooledObjectInfo> ObjectPoolsReadOnly =>
+            ObjectPools.AsReadOnly();
 
         // Hierarchie organisation
         private GameObject _objectPoolEmptyHolder;
