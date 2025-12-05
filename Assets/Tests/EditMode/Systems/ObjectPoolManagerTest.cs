@@ -24,7 +24,6 @@ namespace Tests.EditMode.Systems
         public void TearDown()
         {
             // ObjectPools-Liste leeren und Singleton resetten + löschen
-            ObjectPoolManager.ObjectPools.Clear();
             ObjectPoolManager.ResetSingletonForTests();
             Object.DestroyImmediate(_managingObj);
 

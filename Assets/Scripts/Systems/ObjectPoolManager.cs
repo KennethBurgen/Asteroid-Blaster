@@ -208,11 +208,13 @@ namespace Systems
 
 #if UNITY_INCLUDE_TESTS
         /// <summary>
-        /// Um im Test die Singleton-Instanz des <see cref="ObjectPoolManager"/> zu löschen
+        /// Um im Test die Singleton-Instanz des <see cref="ObjectPoolManager"/> zu löschen und die ObjectPools zu leeren
         /// </summary>
         internal static void ResetSingletonForTests()
         {
             Instance = null;
+            ObjectPools.Clear();
+            _gameObjectsEmpty = null;
         }
 #endif
     }
