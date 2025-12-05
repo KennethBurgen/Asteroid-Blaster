@@ -206,10 +206,10 @@ namespace Systems
         }
 #endif
     }
-}
 
-public class PooledObjectInfo
-{
-    public string LookupString;
-    public List<GameObject> InactiveObjects = new List<GameObject>();
+    public class PooledObjectInfo
+    {
+        public string LookupString;
+        public List<GameObject> InactiveObjects = new List<GameObject>();
+    }
 }
