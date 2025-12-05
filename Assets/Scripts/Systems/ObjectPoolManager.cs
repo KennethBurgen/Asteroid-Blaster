@@ -163,11 +163,21 @@ namespace Systems
         /// <param name="obj">das <see cref="GameObject"/></param>
         public void ReturnObjectToPool(GameObject obj)
         {
+            if (!obj)
+            {
+                Debug.LogWarning("Trying to release a null object");
+                return;
+            }
+
             // Substring - (Clone) - eines per Instantiate erstellten Objects rausfiltern
             string goName = obj.name;
-            if (goName.EndsWith(_prefabSubfix))
+            if (!string.IsNullOrEmpty(_prefabSubfix) && goName.EndsWith(_prefabSubfix))
             {
                 goName = goName.Replace(_prefabSubfix, "");
+            }
+            else if (string.IsNullOrEmpty(_prefabSubfix))
+            {
+                Debug.LogWarning("No prefab subfix");
             }
 
             PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
