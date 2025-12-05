@@ -1,9 +1,17 @@
+using Utilities;
 using Utilities.StateMachineSystem.Interfaces;
 
 namespace Player.PlayerStates
 {
     public class IdlePlayerState : IFixedUpdatableState
     {
+        private readonly PlayerManager _playerManager;
+
+        public IdlePlayerState(PlayerManager playerManager)
+        {
+            _playerManager = playerManager;
+        }
+
         public void OnEnter()
         {
             // to be done
@@ -21,12 +29,16 @@ namespace Player.PlayerStates
 
         public void OnFixedUpdate()
         {
-            // to be done
+            CheckTransition();
         }
 
         public void CheckTransition()
         {
-            // to be done
+            // Moving
+            if (InputProvider.Instance.MoveInput != UnityEngine.Vector2.zero)
+            {
+                _playerManager.ChangePlayerState(_playerManager.MovingPlayerState);
+            }
         }
     }
 }
