@@ -21,7 +21,7 @@ namespace Player
             _stateMachine = new StateMachine();
             _playerController = GetComponent<PlayerController>();
 
-            IdlePlayerState = new IdlePlayerState(this);
+            IdlePlayerState = new IdlePlayerState(this, _playerController);
             MovingPlayerState = new MovingPlayerState(this, _playerController);
 
             _stateMachine.ChangeState(IdlePlayerState);

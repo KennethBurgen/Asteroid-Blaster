@@ -7,20 +7,25 @@ namespace Player.PlayerStates
     public class IdlePlayerState : IFixedUpdatableState
     {
         private readonly PlayerManager _playerManager;
+        private readonly PlayerController _playerController;
 
-        public IdlePlayerState(PlayerManager playerManager)
+        public IdlePlayerState(PlayerManager playerManager, PlayerController playerController)
         {
             _playerManager = playerManager;
+            _playerController = playerController;
         }
 
         public void OnEnter()
         {
             // to be done
+            Debug.Log("Entered IdlePlayerState");
+            _playerController.MovePlayer();
         }
 
         public void OnExit()
         {
             // to be done
+            Debug.Log("Exited IdlePlayerState");
         }
 
         public void OnUpdate()

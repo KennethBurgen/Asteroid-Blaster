@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utilities;
 using Utilities.StateMachineSystem.Interfaces;
 
 namespace Player.PlayerStates
@@ -16,12 +17,13 @@ namespace Player.PlayerStates
 
         public void OnEnter()
         {
-            Debug.Log("Entering Moving");
+            Debug.Log("Entered MovingPlayerState");
         }
 
         public void OnExit()
         {
             // to be done
+            Debug.Log("Exited MovingPlayerState");
         }
 
         public void OnUpdate()
@@ -31,12 +33,22 @@ namespace Player.PlayerStates
 
         public void OnFixedUpdate()
         {
-            // to be done
+            Vector2 movement = InputProvider.Instance.MoveInput;
+            if (movement != Vector2.zero)
+            {
+                _playerController.MovePlayer();
+            }
+
+            CheckTransition();
         }
 
         public void CheckTransition()
         {
-            // to be done
+            // Idle
+            if (InputProvider.Instance.MoveInput == Vector2.zero)
+            {
+                _playerManager.ChangePlayerState(_playerManager.IdlePlayerState);
+            }
         }
     }
 }

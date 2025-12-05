@@ -10,8 +10,7 @@ namespace Utilities
         public static InputProvider Instance { get; private set; }
         private PlayerInputActions _playerInputActions;
 
-        public Vector2 MoveInput =>
-            _playerInputActions?.Player.Move.ReadValue<Vector2>() ?? Vector2.zero;
+        public Vector2 MoveInput => _playerInputActions.Player.Move.ReadValue<Vector2>();
         public bool FireInput => _playerInputActions?.Player.Fire.IsPressed() ?? false;
         public bool BackInput => _playerInputActions?.Player.Back.WasPressedThisFrame() ?? false;
         public bool SubmitInput =>
