@@ -7,20 +7,7 @@ namespace Player
         [SerializeField]
         private Rigidbody2D playerRigidBody;
 
-        [SerializeField]
-        private new Camera camera;
-
         private readonly float _movementSpeed = 10f;
-
-        private float _leftBound,
-            _rightBound;
-
-        void Awake()
-        {
-            _leftBound = camera.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x + 0.32f;
-            _rightBound = camera.ViewportToWorldPoint(new Vector3(1, 0.5f, 0)).x;
-            Debug.Log(_leftBound);
-        }
 
         /// <summary>
         /// Bewegt den Spieler horizontal innerhalb der Kamera-Grenzen
@@ -35,8 +22,16 @@ namespace Player
             {
                 playerRigidBody.linearVelocity = Vector2.zero;
             }
-
-            playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
+            else
+            {
+                //playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
+                Vector2 targetVelocity = new Vector2(movement.x * _movementSpeed, 0);
+                playerRigidBody.linearVelocity = Vector2.Lerp(
+                    playerRigidBody.linearVelocity,
+                    targetVelocity,
+                    20f * Time.fixedDeltaTime
+                );
+            }
         }
 
         /// <summary>
