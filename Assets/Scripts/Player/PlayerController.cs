@@ -1,9 +1,10 @@
+using Player.Interfaces;
 using Player.PlayerAttributes;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPlayerController
     {
         // Serializable Referenzen
         [SerializeField]

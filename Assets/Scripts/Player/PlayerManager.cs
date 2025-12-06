@@ -1,3 +1,4 @@
+using Player.Interfaces;
 using Player.PlayerAttributes;
 using Player.PlayerStates;
 using UnityEngine;
@@ -6,7 +7,7 @@ using Utilities.StateMachineSystem.Interfaces;
 
 namespace Player
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour, IPlayerManager
     {
         // Serializable Referenzen
         [SerializeField]
@@ -18,8 +19,8 @@ namespace Player
         private PlayerAttributesManager _playerAttributesManager;
 
         // Player-States
-        public IdlePlayerState IdlePlayerState { get; private set; }
-        public MovingPlayerState MovingPlayerState { get; private set; }
+        public IFixedUpdatableState IdlePlayerState { get; private set; }
+        public IFixedUpdatableState MovingPlayerState { get; private set; }
 
         private void Awake()
         {

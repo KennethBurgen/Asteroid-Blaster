@@ -1,3 +1,4 @@
+using Player.Interfaces;
 using UnityEngine;
 using Utilities;
 using Utilities.StateMachineSystem.Interfaces;
@@ -6,12 +7,12 @@ namespace Player.PlayerStates
 {
     public class MovingPlayerState : IFixedUpdatableState
     {
-        private readonly PlayerManager _playerManager;
-        private readonly PlayerController _playerController;
+        private readonly IPlayerManager _playerManager;
+        private readonly IPlayerController _playerController;
 
         private Vector2 _movement;
 
-        public MovingPlayerState(PlayerManager playerManager, PlayerController playerController)
+        public MovingPlayerState(IPlayerManager playerManager, IPlayerController playerController)
         {
             _playerManager = playerManager;
             _playerController = playerController;
