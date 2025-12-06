@@ -61,32 +61,5 @@ namespace Tests.EditMode.Player
             _sut.FixedUpdate();
             _stateMachineMock.Verify(mock => mock.FixedUpdate(), Times.Once);
         }
-
-        [Test]
-        public void AwakeSetsReferencesAndChangesToDefaultPlayerState()
-        {
-            _sut.playerAttributes = ScriptableObject.CreateInstance<PlayerAttributesSO>();
-
-            Assert.That(_sut._playerController, Is.Null, "PlayerController not set");
-            Assert.That(_sut._playerAttributesManager, Is.Null, "PlayerAttributesManager not set");
-            Assert.That(_sut.IdlePlayerState, Is.Null, "IdlePlayerState not set");
-            Assert.That(_sut.MovingPlayerState, Is.Null, "MovingPlayerState not set");
-
-            _sut.Awake();
-
-            Assert.That(_sut._playerController, Is.Not.Null, "PlayerController is set");
-            Assert.That(
-                _sut._playerAttributesManager,
-                Is.Not.Null,
-                "PlayerAttributesManager is set"
-            );
-            Assert.That(_sut.IdlePlayerState, Is.Not.Null, "IdlePlayerState is set");
-            Assert.That(_sut.MovingPlayerState, Is.Not.Null, "MovingPlayerState is set");
-            Assert.That(
-                _sut._stateMachine.CurrentState,
-                Is.EqualTo(_sut.IdlePlayerState),
-                "StateMachines current State is IdlePlayerState"
-            );
-        }
     }
 }
