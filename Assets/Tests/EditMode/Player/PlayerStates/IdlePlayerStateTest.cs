@@ -62,5 +62,24 @@ namespace Tests.EditMode.Player.PlayerStates
             _playerManager.Verify(mock => mock.ChangePlayerState(movingPlayerState), Times.Once);
             _playerController.Verify(mock => mock.MovePlayer(vector2), Times.Once);
         }
+
+        [Test]
+        public void CheckTransitionNotTransitionsToMovingPlayerState()
+        {
+            var movingPlayerState = new MovingPlayerState(
+                _playerManager.Object,
+                _playerController.Object
+            );
+
+            var vector2 = new Vector2(0, 0);
+
+            _inputProvider.Setup(mock => mock.MoveInput).Returns(vector2);
+            _playerManager.Setup(mock => mock.MovingPlayerState).Returns(movingPlayerState);
+
+            _sut.CheckTransition();
+
+            _playerManager.Verify(mock => mock.ChangePlayerState(movingPlayerState), Times.Never);
+            _playerController.Verify(mock => mock.MovePlayer(vector2), Times.Never);
+        }
     }
 }
