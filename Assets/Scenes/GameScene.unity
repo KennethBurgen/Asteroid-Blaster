@@ -644,10 +644,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1573685111}
   - component: {fileID: 1573685110}
+  - component: {fileID: 1573685116}
   - component: {fileID: 1573685112}
   - component: {fileID: 1573685115}
   - component: {fileID: 1573685114}
-  - component: {fileID: 1573685116}
   m_Layer: 0
   m_Name: SpaceshipObj
   m_TagString: Untagged
@@ -768,7 +768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Player::Player.PlayerController
   playerRigidBody: {fileID: 1573685112}
-  camera: {fileID: 1351769160}
 --- !u!114 &1573685115
 MonoBehaviour:
   m_ObjectHideFlags: 0
