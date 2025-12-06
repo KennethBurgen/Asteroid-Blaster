@@ -36,29 +36,7 @@ namespace Player
                 playerRigidBody.linearVelocity = Vector2.zero;
             }
 
-            // Bewegung an Boundary verhindern
-            if (playerRigidBody.position.x <= _leftBound && movement.x < 0)
-            {
-                Vector2 vel = playerRigidBody.linearVelocity;
-                if (vel.x < 0)
-                {
-                    vel.x = 0;
-                }
-                playerRigidBody.linearVelocity = vel;
-            }
-            else if (playerRigidBody.position.x >= _rightBound && movement.x > 0)
-            {
-                Vector2 vel = playerRigidBody.linearVelocity;
-                if (vel.x > 0)
-                {
-                    vel.x = 0;
-                }
-                playerRigidBody.linearVelocity = vel;
-            }
-            else
-            {
-                playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
-            }
+            playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
         }
 
         /// <summary>
