@@ -5,7 +5,7 @@ namespace Player.PlayerAttributes
         // Referenzen
         private readonly PlayerAttributesSO _playerStats;
 
-        // PlayerStats
+        // Player-Attributes
         public float HorizontalMovementSpeed { get; private set; }
         public int MaxHealth { get; private set; }
 

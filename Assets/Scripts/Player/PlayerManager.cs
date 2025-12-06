@@ -1,4 +1,4 @@
-using System;
+using Player.PlayerAttributes;
 using Player.PlayerStates;
 using UnityEngine;
 using Utilities.StateMachineSystem;
@@ -8,11 +8,16 @@ namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
+        // Serializable Referenzen
+        [SerializeField]
+        private PlayerAttributesSO playerAttributes;
+
         // Referenzen
         private IStateMachine _stateMachine;
         private PlayerController _playerController;
+        private PlayerAttributesManager _playerAttributesManager;
 
-        // PlayerStates
+        // Player-States
         public IdlePlayerState IdlePlayerState { get; private set; }
         public MovingPlayerState MovingPlayerState { get; private set; }
 
@@ -20,6 +25,7 @@ namespace Player
         {
             _stateMachine = new StateMachine();
             _playerController = GetComponent<PlayerController>();
+            _playerAttributesManager = new PlayerAttributesManager(playerAttributes);
 
             IdlePlayerState = new IdlePlayerState(this, _playerController);
             MovingPlayerState = new MovingPlayerState(this, _playerController);
