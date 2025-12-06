@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerAttributes
@@ -8,12 +9,12 @@ namespace Player.PlayerAttributes
     )]
     public class PlayerAttributes : ScriptableObject
     {
-        [field: Header("Resources")]
-        [field: SerializeField]
-        public int MaxHealth { get; private set; }
+        [Title("Resources")]
+        [ProgressBar(0, 9, 0, 1, 0, Segmented = true)]
+        public int MaxHealth = 3;
 
-        [field: Header("Movement")]
-        [field: SerializeField]
-        public float HorizontalMovementSpeed { get; private set; }
+        [Title("Movement")]
+        [ProgressBar(0, 10, Segmented = true)]
+        public float HorizontalMovementSpeed = 8;
     }
 }

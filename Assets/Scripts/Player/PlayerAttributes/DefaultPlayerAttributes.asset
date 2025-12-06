@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6989a3c846106d249be78432474ccd8c, type: 3}
   m_Name: DefaultPlayerAttributes
   m_EditorClassIdentifier: Player::Player.PlayerAttributes.PlayerAttributes
-  <MaxHealth>k__BackingField: 0
-  <HorizontalMovementSpeed>k__BackingField: 0
+  MaxHealth: 3
+  HorizontalMovementSpeed: 8
