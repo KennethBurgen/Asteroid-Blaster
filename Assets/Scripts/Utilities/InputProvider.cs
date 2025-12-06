@@ -1,11 +1,12 @@
 using UnityEngine;
+using Utilities.Interfaces;
 
 namespace Utilities
 {
     /// <summary>
     /// Der InputProvider hängt als Komponente am Bootstrap-Objekt
     /// </summary>
-    public class InputProvider : MonoBehaviour
+    public class InputProvider : MonoBehaviour, IInputProvider
     {
         public static InputProvider Instance { get; private set; }
         private PlayerInputActions _playerInputActions;
