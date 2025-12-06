@@ -1,3 +1,4 @@
+using Player.PlayerAttributes;
 using UnityEngine;
 
 namespace Player
@@ -6,8 +7,6 @@ namespace Player
     {
         [SerializeField]
         private Rigidbody2D playerRigidBody;
-
-        private readonly float _movementSpeed = 10f;
 
         /// <summary>
         /// Bewegt den Spieler horizontal innerhalb der Kamera-Grenzen
@@ -25,7 +24,10 @@ namespace Player
             else
             {
                 //playerRigidBody.AddForce(movement * (_movementSpeed * 10f), ForceMode2D.Force);
-                Vector2 targetVelocity = new Vector2(movement.x * _movementSpeed, 0);
+                Vector2 targetVelocity = new Vector2(
+                    movement.x * PlayerAttributesManager.HorizontalMovementSpeed,
+                    0
+                );
                 playerRigidBody.linearVelocity = Vector2.Lerp(
                     playerRigidBody.linearVelocity,
                     targetVelocity,
@@ -35,19 +37,17 @@ namespace Player
         }
 
         /// <summary>
-        /// Verhindert das sich der Spieler schneller als die <see cref="_movementSpeed">maximale Geschwindigkeit</see> bewegt
+        /// Verhindert das sich der Spieler schneller als die <see cref="PlayerAttributesManager.HorizontalMovementSpeed">maximale horizontale Geschwindigkeit</see> bewegt
         /// </summary>
-        public void SpeedControl()
+        public void HorizontalSpeedControl()
         {
-            Vector2 flatVel = new Vector2(
-                playerRigidBody.linearVelocity.x,
-                playerRigidBody.linearVelocity.y
-            );
+            Vector2 flatVel = new Vector2(playerRigidBody.linearVelocity.x, 0);
 
-            if (flatVel.magnitude > _movementSpeed)
+            if (flatVel.magnitude > PlayerAttributesManager.HorizontalMovementSpeed)
             {
-                Vector2 limitedVel = flatVel.normalized * _movementSpeed;
-                playerRigidBody.linearVelocity = new Vector2(limitedVel.x, limitedVel.y);
+                Vector2 limitedVel =
+                    flatVel.normalized * PlayerAttributesManager.HorizontalMovementSpeed;
+                playerRigidBody.linearVelocity = new Vector2(limitedVel.x, 0);
             }
         }
     }

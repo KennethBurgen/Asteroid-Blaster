@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DefaultPlayerAttributes
   m_EditorClassIdentifier: Player::Player.PlayerAttributes.PlayerAttributes
   MaxHealth: 3
-  HorizontalMovementSpeed: 8
+  HorizontalMovementSpeed: 3

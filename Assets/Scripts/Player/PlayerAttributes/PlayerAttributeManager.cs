@@ -6,8 +6,8 @@ namespace Player.PlayerAttributes
         private readonly PlayerAttributesSO _playerStats;
 
         // Player-Attributes
-        public float HorizontalMovementSpeed { get; private set; }
-        public int MaxHealth { get; private set; }
+        public static float HorizontalMovementSpeed { get; private set; }
+        public static int MaxHealth { get; private set; }
 
         public PlayerAttributesManager(PlayerAttributesSO playerStats)
         {

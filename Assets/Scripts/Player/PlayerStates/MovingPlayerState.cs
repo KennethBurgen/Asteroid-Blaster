@@ -33,7 +33,7 @@ namespace Player.PlayerStates
             // to be done
             _movement = InputProvider.Instance.MoveInput;
 
-            _playerController.SpeedControl();
+            _playerController.HorizontalSpeedControl();
         }
 
         public void OnFixedUpdate()
