@@ -1,7 +1,11 @@
+using System.Runtime.CompilerServices;
 using Player.Interfaces;
 using UnityEngine;
 using Utilities;
+using Utilities.Interfaces;
 using Utilities.StateMachineSystem.Interfaces;
+
+[assembly: InternalsVisibleTo("Tests.EditMode.Player")]
 
 namespace Player.PlayerStates
 {
@@ -9,8 +13,9 @@ namespace Player.PlayerStates
     {
         private readonly IPlayerManager _playerManager;
         private readonly IPlayerController _playerController;
+        internal IInputProvider _inputProvider = InputProvider.Instance;
 
-        private Vector2 _movement;
+        internal Vector2 _movement;
 
         public MovingPlayerState(IPlayerManager playerManager, IPlayerController playerController)
         {
@@ -30,19 +35,15 @@ namespace Player.PlayerStates
 
         public void OnUpdate()
         {
-            // Input beziehen
-            _movement = InputProvider.Instance.MoveInput;
+            _movement = _inputProvider.MoveInput;
 
-            // Bewegungsgeschwindigkeit begrenzen
             _playerController.HorizontalSpeedControl();
         }
 
         public void OnFixedUpdate()
         {
-            // Spieler bewegen
             _playerController.MovePlayer(_movement);
 
-            // Mögliche Transitions prüfen
             CheckTransition();
         }
 
@@ -52,7 +53,7 @@ namespace Player.PlayerStates
         public void CheckTransition()
         {
             // Idle
-            if (InputProvider.Instance.MoveInput == Vector2.zero)
+            if (_inputProvider.MoveInput == Vector2.zero)
             {
                 _playerManager.ChangePlayerState(_playerManager.IdlePlayerState);
             }
