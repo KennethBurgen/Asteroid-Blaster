@@ -19,27 +19,29 @@ namespace Player.PlayerStates
 
         public void OnEnter()
         {
-            Debug.Log("Entered MovingPlayerState");
+            // to be done
         }
 
         public void OnExit()
         {
             // to be done
-            Debug.Log("Exited MovingPlayerState");
         }
 
         public void OnUpdate()
         {
-            // to be done
+            // Input beziehen
             _movement = InputProvider.Instance.MoveInput;
 
+            // Bewegungsgeschwindigkeit begrenzen
             _playerController.HorizontalSpeedControl();
         }
 
         public void OnFixedUpdate()
         {
+            // Spieler bewegen
             _playerController.MovePlayer(_movement);
 
+            // Mögliche Transitions prüfen
             CheckTransition();
         }
 

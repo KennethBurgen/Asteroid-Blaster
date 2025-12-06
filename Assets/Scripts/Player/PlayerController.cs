@@ -5,6 +5,7 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        // Serializable Referenzen
         [SerializeField]
         private Rigidbody2D playerRigidBody;
 

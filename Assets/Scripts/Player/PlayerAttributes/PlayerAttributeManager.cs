@@ -15,6 +15,9 @@ namespace Player.PlayerAttributes
             SetAttributes();
         }
 
+        /// <summary>
+        /// Setzt die eigenen Attribut-Werte entsprechend denen aus dem eigenen <see cref="PlayerAttributesSO"/>-ScriptableObject
+        /// </summary>
         private void SetAttributes()
         {
             // Resources

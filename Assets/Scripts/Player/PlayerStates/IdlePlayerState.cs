@@ -18,14 +18,12 @@ namespace Player.PlayerStates
         public void OnEnter()
         {
             // to be done
-            Debug.Log("Entered IdlePlayerState");
             _playerController.MovePlayer(Vector2.zero);
         }
 
         public void OnExit()
         {
             // to be done
-            Debug.Log("Exited IdlePlayerState");
         }
 
         public void OnUpdate()

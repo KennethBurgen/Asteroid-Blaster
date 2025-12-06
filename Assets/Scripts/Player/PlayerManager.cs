@@ -23,13 +23,16 @@ namespace Player
 
         private void Awake()
         {
+            // Referenzen ziehen bzw. instanzieren
             _stateMachine = new StateMachine();
             _playerController = GetComponent<PlayerController>();
             _playerAttributesManager = new PlayerAttributesManager(playerAttributes);
 
+            // Player-States instanzieren
             IdlePlayerState = new IdlePlayerState(this, _playerController);
             MovingPlayerState = new MovingPlayerState(this, _playerController);
 
+            // In default-State wechseln
             _stateMachine.ChangeState(IdlePlayerState);
         }
 
