@@ -3,13 +3,13 @@ namespace Player.PlayerAttributes
     public class PlayerAttributesManager
     {
         // Referenzen
-        private readonly PlayerAttributes _playerStats;
+        private readonly PlayerAttributesSO _playerStats;
 
         // PlayerStats
         public float HorizontalMovementSpeed { get; private set; }
         public int MaxHealth { get; private set; }
 
-        public PlayerAttributesManager(PlayerAttributes playerStats)
+        public PlayerAttributesManager(PlayerAttributesSO playerStats)
         {
             _playerStats = playerStats;
             SetAttributes();

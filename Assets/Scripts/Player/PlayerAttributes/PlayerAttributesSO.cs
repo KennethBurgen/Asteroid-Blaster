@@ -7,7 +7,7 @@ namespace Player.PlayerAttributes
         fileName = "PlayerAttributes",
         menuName = "Scriptable Objects/PlayerAttributes"
     )]
-    public class PlayerAttributes : ScriptableObject
+    public class PlayerAttributesSO : ScriptableObject
     {
         [Title("Resources")]
         [ProgressBar(0, 9, 0, 1, 0, Segmented = true)]
