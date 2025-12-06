@@ -1,8 +1,6 @@
-using System.Collections;
 using NUnit.Framework;
 using Player.PlayerAttributes;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace Tests.EditMode.Player.PlayerAttributes
 {
