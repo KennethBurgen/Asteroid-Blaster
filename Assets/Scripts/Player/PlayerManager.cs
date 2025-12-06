@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Player.Interfaces;
 using Player.PlayerAttributes;
 using Player.PlayerStates;
@@ -5,24 +6,26 @@ using UnityEngine;
 using Utilities.StateMachineSystem;
 using Utilities.StateMachineSystem.Interfaces;
 
+[assembly: InternalsVisibleTo("Tests.EditMode.Player")]
+
 namespace Player
 {
     public class PlayerManager : MonoBehaviour, IPlayerManager
     {
         // Serializable Referenzen
         [SerializeField]
-        private PlayerAttributesSO playerAttributes;
+        internal PlayerAttributesSO playerAttributes;
 
         // Referenzen
-        private IStateMachine _stateMachine;
-        private PlayerController _playerController;
-        private PlayerAttributesManager _playerAttributesManager;
+        internal IStateMachine _stateMachine;
+        internal PlayerController _playerController;
+        internal PlayerAttributesManager _playerAttributesManager;
 
         // Player-States
         public IFixedUpdatableState IdlePlayerState { get; private set; }
         public IFixedUpdatableState MovingPlayerState { get; private set; }
 
-        private void Awake()
+        public void Awake()
         {
             // Referenzen ziehen bzw. instanzieren
             _stateMachine = new StateMachine();
